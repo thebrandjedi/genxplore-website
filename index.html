@@ -3,74 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="GenXplore™️ — For Gen X professionals who sense a shift or feel adrift. Take the 3-minute Second Act Scorecard and discover what's actually holding you back.">
-<title>GenXplore™️ | The Second Act Scorecard</title>
+<title>GenXplore™ | The Second Act Scorecard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════
-   RESET & TOKENS
-═══════════════════════════════════════ */
+
+/* ════════════════════════════════════════════
+   TOKENS
+════════════════════════════════════════════ */
+:root {
+  --black:   #0A0908;
+  --off:     #111009;
+  --dark:    #1A1814;
+  --gold:    #C29050;
+  --gold-l:  #D4A96A;
+  --cream:   #EAE4D8;
+  --muted:   #9A9080;   /* lifted from #5A5248 — readable on near-black */
+  --dim:     #6A6358;   /* lifted from #2E2A24 — was nearly invisible    */
+  --border:  rgba(194,144,80,0.18);
+  --fd:      'Playfair Display', Georgia, serif;
+  --fb:      'DM Sans', Helvetica, sans-serif;
+  --pad:     clamp(1.5rem, 6vw, 5rem);
+}
+
+/* ════════════════════════════════════════════
+   BASE
+════════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
-:root {
-  --gold:        #C29050;
-  --gold-light:  #D4A96A;
-  --gold-dim:    rgba(194,144,80,0.12);
-  --gold-border: rgba(194,144,80,0.22);
-  --dark:        #0C0B09;
-  --dark-2:      #131210;
-  --dark-3:      #1A1814;
-  --dark-4:      #222018;
-  --mid:         #2A2720;
-  --text:        #EAE4D8;
-  --text-muted:  #8A7E6E;
-  --text-dim:    #524C42;
-  --font-d:      'Playfair Display', Georgia, serif;
-  --font-b:      'DM Sans', system-ui, sans-serif;
-  --max:         1120px;
-  --pad:         clamp(1.5rem, 5vw, 4rem);
-}
-
 body {
-  background: var(--dark);
-  color: var(--text);
-  font-family: var(--font-b);
+  background: var(--black);
+  color: var(--cream);
+  font-family: var(--fb);
   font-weight: 300;
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.6;
   overflow-x: hidden;
+  cursor: default;
 }
-
-/* ═══════════════════════════════════════
-   UTILITIES
-═══════════════════════════════════════ */
-.label {
-  display: block;
-  font-size: 9.5px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1rem;
-}
-
-.rule {
-  width: 40px;
-  height: 1px;
-  background: var(--gold);
-  margin: 1.5rem 0;
-}
-
-.rule-center { margin: 1.5rem auto; }
 
 a { color: inherit; text-decoration: none; }
 
-/* ═══════════════════════════════════════
-   NAV
-═══════════════════════════════════════ */
+/* ════════════════════════════════════════════
+   CUSTOM CURSOR
+════════════════════════════════════════════ */
+.cursor {
+  position: fixed;
+  width: 8px; height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(194,144,80,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.12s ease, width 0.3s ease, height 0.3s ease;
+}
+
+body:hover .cursor { opacity: 1; }
+
+/* ════════════════════════════════════════════
+   NAV — ultra minimal, type only
+════════════════════════════════════════════ */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -78,859 +84,932 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.25rem var(--pad);
-  background: rgba(12,11,9,0.92);
+  padding: 1.5rem var(--pad);
+  background: rgba(10,9,8,0.92);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--gold-border);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .nav-logo {
-  font-family: var(--font-b);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
-.nav-logo span {
-  color: var(--text-muted);
-  font-weight: 300;
-}
-
-.nav-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
+  font-family: var(--fb);
   font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--gold);
-  border: 1px solid var(--gold-border);
-  padding: 0.55rem 1.1rem;
-  transition: background 0.2s, color 0.2s;
 }
 
-.nav-cta:hover {
-  background: var(--gold);
-  color: var(--dark);
+.nav-logo span { color: var(--muted); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
 }
 
-.nav-cta svg { width: 12px; height: 12px; fill: currentColor; }
+.nav-link {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s;
+}
 
-/* ═══════════════════════════════════════
-   HERO
-═══════════════════════════════════════ */
+.nav-link:hover { color: var(--gold); }
+
+.nav-cta {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 1px;
+  transition: opacity 0.2s;
+}
+
+.nav-cta:hover { opacity: 0.7; }
+
+/* ════════════════════════════════════════════
+   HERO — full viewport, type dominates
+════════════════════════════════════════════ */
 .hero {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 8rem var(--pad) 5rem;
+  justify-content: flex-end;
+  padding: 0 var(--pad) 5rem;
   position: relative;
   overflow: hidden;
+  background: var(--black);
 }
 
-.hero::before {
-  content: '';
+/* Enormous background numeral — atmosphere only */
+.hero-bg-num {
   position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 70% 60% at 80% 40%, rgba(194,144,80,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 80% at 10% 70%, rgba(194,144,80,0.04) 0%, transparent 60%);
+  top: 50%;
+  right: -2vw;
+  transform: translateY(-52%);
+  font-family: var(--fd);
+  font-size: clamp(28rem, 52vw, 72rem);
+  font-weight: 700;
+  line-height: 0.85;
+  color: rgba(194,144,80,0.04);
   pointer-events: none;
-}
-
-/* Grain overlay */
-.hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity: 0.4;
-  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.04em;
 }
 
 .hero-inner {
   position: relative;
   z-index: 1;
-  max-width: var(--max);
-  margin: 0 auto;
-  width: 100%;
+  max-width: var(--max, 1200px);
 }
 
-.hero-eyebrow {
+/* Eyebrow */
+.hero-kicker {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   opacity: 0;
-  animation: fadeUp 0.8s ease 0.2s forwards;
+  animation: rise 1s cubic-bezier(0.16,1,0.3,1) 0.1s forwards;
 }
 
-.hero-eyebrow::before {
+.hero-kicker::before {
   content: '';
-  width: 32px;
+  width: 2rem;
   height: 1px;
   background: var(--gold);
 }
 
-.hero-eyebrow span {
-  font-size: 10px;
+.hero-kicker span {
+  font-size: 9px;
   font-weight: 500;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--gold);
 }
 
-.hero h1 {
-  font-family: var(--font-d);
-  font-size: clamp(2.6rem, 6vw, 5.2rem);
+/* THE HEADLINE — the entire product */
+.hero-h1 {
+  font-family: var(--fd);
+  font-size: clamp(4rem, 10.5vw, 12rem);
   font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  color: var(--text);
-  max-width: 14ch;
-  margin-bottom: 1.75rem;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 0.4s forwards;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+  margin-bottom: 0;
 }
 
-.hero h1 em {
+.hero-h1 .line { display: block; overflow: hidden; }
+
+.hero-h1 .line span {
+  display: block;
+  opacity: 0;
+  transform: translateY(110%);
+  animation: lineRise 1s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+.hero-h1 .line:nth-child(1) span { animation-delay: 0.2s; }
+.hero-h1 .line:nth-child(2) span { animation-delay: 0.35s; }
+.hero-h1 .line:nth-child(3) span { animation-delay: 0.5s; }
+
+.hero-h1 em {
   font-style: italic;
   color: var(--gold);
 }
 
-.hero-sub {
-  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-  color: var(--text-muted);
-  max-width: 44ch;
+/* Bottom strip */
+.hero-bottom {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: end;
+  gap: 3rem;
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+  opacity: 0;
+  animation: rise 0.8s cubic-bezier(0.16,1,0.3,1) 0.9s forwards;
+}
+
+.hero-desc {
+  font-size: 0.88rem;
+  color: var(--muted);
   line-height: 1.75;
-  margin-bottom: 2.5rem;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 0.6s forwards;
+  max-width: 32ch;
 }
 
-.hero-actions {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 0.8s forwards;
-}
-
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  background: var(--gold);
-  color: var(--dark);
-  font-family: var(--font-b);
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  padding: 1rem 1.75rem;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
-}
-
-.btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
-.btn-primary svg { width: 13px; height: 13px; fill: currentColor; }
-
-.hero-note {
-  font-size: 0.78rem;
-  color: var(--text-dim);
-  letter-spacing: 0.04em;
-}
-
-/* Scroll indicator */
-.scroll-hint {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
+.hero-cta-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  opacity: 0;
-  animation: fadeIn 1s ease 1.4s forwards;
 }
 
-.scroll-hint span {
-  font-size: 8px;
-  letter-spacing: 0.2em;
+.btn-hero {
+  display: block;
+  background: var(--gold);
+  color: var(--black);
+  font-family: var(--fb);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--text-dim);
+  padding: 1.1rem 2.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  width: 100%;
+  text-align: center;
 }
 
-.scroll-hint-line {
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  animation: scrollPulse 2s ease-in-out infinite;
+.btn-hero:hover {
+  background: var(--gold-l);
+  transform: translateY(-2px);
 }
 
-/* ═══════════════════════════════════════
+.btn-hero-note {
+  font-size: 0.7rem;
+  color: var(--dim);
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.hero-stat {
+  text-align: right;
+}
+
+.hero-stat-num {
+  font-family: var(--fd);
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hero-stat-label {
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.35rem;
+}
+
+/* ════════════════════════════════════════════
+   MARQUEE — horizontal scroll text band
+════════════════════════════════════════════ */
+.marquee-wrap {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 1.1rem 0;
+  overflow: hidden;
+  background: var(--off);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 0;
+  white-space: nowrap;
+  animation: marquee 28s linear infinite;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding-right: 2.5rem;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.marquee-item::after {
+  content: '◈';
+  color: var(--gold);
+  font-size: 8px;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ════════════════════════════════════════════
    SECTION SHARED
-═══════════════════════════════════════ */
-section {
-  padding: 6rem var(--pad);
-  border-top: 1px solid var(--gold-border);
+════════════════════════════════════════════ */
+.section {
+  padding: 8rem var(--pad);
+  border-top: 1px solid var(--border);
 }
 
-.section-inner {
-  max-width: var(--max);
-  margin: 0 auto;
+/* ════════════════════════════════════════════
+   S1 — THE STRAIN
+   Huge number + text column layout
+════════════════════════════════════════════ */
+.strain {
+  background: var(--off);
+  position: relative;
+  overflow: hidden;
 }
 
-.section-header {
-  margin-bottom: 4rem;
+.strain-inner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5rem;
+  align-items: start;
 }
 
-/* ═══════════════════════════════════════
-   S1 — QUIET STRAIN (Still Everyone's Rock)
-═══════════════════════════════════════ */
-.quiet-strain {
-  background: var(--dark-2);
+.strain-index {
+  font-family: var(--fd);
+  font-size: clamp(8rem, 16vw, 20rem);
+  font-weight: 700;
+  line-height: 0.85;
+  color: var(--dim);
+  letter-spacing: -0.04em;
+  user-select: none;
 }
 
-.quiet-strain .section-inner {
+.strain-content {
+  padding-top: 1rem;
+}
+
+.section-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section-label::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.strain-h2 {
+  font-family: var(--fd);
+  font-size: clamp(2.5rem, 5vw, 5.5rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+  margin-bottom: 3rem;
+}
+
+.strain-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: center;
+  gap: 3rem;
 }
 
-.quiet-strain-text h2 {
-  font-family: var(--font-d);
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: 2rem;
-}
-
-.quiet-strain-text p {
+.strain-p {
   font-size: 0.95rem;
-  color: var(--text-muted);
+  color: var(--muted);
   line-height: 1.85;
+}
+
+.strain-p strong { color: var(--cream); font-weight: 400; }
+
+/* Pull quote */
+.strain-quote {
+  border-left: 1px solid var(--gold);
+  padding: 1.5rem 0 1.5rem 2rem;
+  margin-top: 3rem;
+}
+
+.strain-quote p {
+  font-family: var(--fd);
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  line-height: 1.5;
+  color: var(--cream);
   margin-bottom: 1rem;
 }
 
-.quiet-strain-text p strong {
-  color: var(--text);
-  font-weight: 400;
-}
-
-.quiet-strain-visual {
-  position: relative;
-  padding: 3rem 2rem;
-  border: 1px solid var(--gold-border);
-}
-
-.quiet-strain-visual::before {
-  content: '"';
-  font-family: var(--font-d);
-  font-size: 8rem;
-  color: var(--gold-dim);
-  position: absolute;
-  top: -1rem;
-  left: 1.5rem;
-  line-height: 1;
-}
-
-.quiet-strain-visual p {
-  font-family: var(--font-d);
-  font-style: italic;
-  font-size: 1.15rem;
-  line-height: 1.7;
-  color: var(--text);
-}
-
-.quiet-strain-visual cite {
-  display: block;
-  margin-top: 1.5rem;
-  font-family: var(--font-b);
+.strain-quote cite {
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
   font-style: normal;
-  font-size: 0.78rem;
-  color: var(--text-dim);
-  letter-spacing: 0.08em;
 }
 
-/* ═══════════════════════════════════════
-   S2 — RECLAIM YOUR MEANING
-═══════════════════════════════════════ */
-.reclaim {
+/* ════════════════════════════════════════════
+   S2 — STATEMENT (full-bleed type)
+════════════════════════════════════════════ */
+.statement {
+  background: var(--black);
+  padding: 10rem var(--pad);
+}
+
+.statement-inner {
+  max-width: 900px;
+}
+
+.statement-pre {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.statement-pre::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--gold);
+}
+
+.statement-h2 {
+  font-family: var(--fd);
+  font-size: clamp(2.8rem, 6vw, 7rem);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+}
+
+.statement-h2 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.statement-h2 .ruled {
+  display: block;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* ════════════════════════════════════════════
+   S3 — SCORECARD (horizontal split)
+════════════════════════════════════════════ */
+.scorecard {
   background: var(--dark);
 }
 
-.reclaim .section-inner {
-  max-width: 720px;
-  text-align: center;
-}
-
-.reclaim h2 {
-  font-family: var(--font-d);
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: 2rem;
-}
-
-.reclaim p {
-  font-size: 1rem;
-  color: var(--text-muted);
-  line-height: 1.85;
-  margin-bottom: 0.75rem;
-}
-
-.reclaim p strong {
-  color: var(--text);
-  font-weight: 400;
-}
-
-/* ═══════════════════════════════════════
-   S3 — DISCOVER YOUR PROFILE (Scorecard)
-═══════════════════════════════════════ */
-.discover {
-  background: var(--dark-3);
-}
-
-.discover .section-inner {
+.scorecard-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5rem;
+  gap: 8rem;
   align-items: center;
 }
 
-.discover-text h2 {
-  font-family: var(--font-d);
-  font-size: clamp(2rem, 3.5vw, 3rem);
+.scorecard-text h2 {
+  font-family: var(--fd);
+  font-size: clamp(2.5rem, 4.5vw, 5rem);
   font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+  margin-bottom: 2.5rem;
 }
 
-.discover-text p {
-  font-size: 0.95rem;
-  color: var(--text-muted);
+.scorecard-text p {
+  font-size: 0.93rem;
+  color: var(--muted);
   line-height: 1.85;
   margin-bottom: 1rem;
+  max-width: 40ch;
 }
 
-.discover-text p strong {
-  color: var(--text);
-  font-weight: 400;
-}
+.scorecard-text p strong { color: var(--cream); font-weight: 400; }
 
-.discover-cta {
-  margin-top: 2rem;
-}
+.scorecard-cta { margin-top: 3rem; }
 
-/* Radar placeholder visual */
-.discover-radar {
+/* Dimensions — stacked list style */
+.scorecard-dims {
   display: flex;
   flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border);
+}
+
+.dim-row {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
+  justify-content: space-between;
+  padding: 1.5rem 1.75rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+  cursor: default;
 }
 
-.radar-ring {
-  position: relative;
-  width: 260px;
-  height: 260px;
+.dim-row:last-child { border-bottom: none; }
+.dim-row:hover { background: rgba(194,144,80,0.04); }
+
+.dim-row-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
 }
 
-.radar-ring svg {
-  width: 100%;
-  height: 100%;
+.dim-num {
+  font-family: var(--fd);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--dim);
+  width: 1.5rem;
 }
 
-.radar-labels {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 0.5rem 1rem;
-  text-align: center;
-}
-
-.radar-label {
-  font-size: 9px;
+.dim-name {
+  font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--text-dim);
+  color: var(--cream);
 }
 
-.radar-label.active { color: var(--gold); }
+.dim-desc {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
 
-/* ═══════════════════════════════════════
-   S4 — VERBATIMS
-═══════════════════════════════════════ */
+.dim-bar {
+  width: 60px;
+  height: 1px;
+  background: var(--dim);
+  position: relative;
+  overflow: visible;
+}
+
+.dim-bar::after {
+  content: '';
+  position: absolute;
+  left: 0; top: -1px;
+  height: 3px;
+  background: var(--gold);
+  transition: width 1s cubic-bezier(0.16,1,0.3,1);
+}
+
+.dim-row:nth-child(1) .dim-bar::after { width: 82%; }
+.dim-row:nth-child(2) .dim-bar::after { width: 61%; }
+.dim-row:nth-child(3) .dim-bar::after { width: 74%; }
+.dim-row:nth-child(4) .dim-bar::after { width: 55%; }
+.dim-row:nth-child(5) .dim-bar::after { width: 68%; }
+.dim-row:nth-child(6) .dim-bar::after { width: 79%; }
+
+/* ════════════════════════════════════════════
+   S4 — VERBATIMS (editorial card grid)
+════════════════════════════════════════════ */
 .verbatims {
-  background: var(--dark-2);
+  background: var(--off);
 }
 
-.verbatims h2 {
-  font-family: var(--font-d);
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
+.verbatims-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2rem;
+}
+
+.verbatims-head h2 {
+  font-family: var(--fd);
+  font-size: clamp(2rem, 4vw, 4.5rem);
   font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: 3rem;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+}
+
+.verbatims-count {
+  font-family: var(--fd);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--muted);
+  font-style: italic;
 }
 
 .verbatims-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5px;
-  border: 1.5px solid var(--gold-border);
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
 }
 
-.verbatim-card {
-  background: var(--dark-3);
-  padding: 2.25rem 2rem;
+.verbatim {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid var(--border);
   transition: background 0.3s;
 }
 
-.verbatim-card:hover { background: var(--mid); }
+.verbatim:last-child { border-right: none; }
+.verbatim:hover { background: rgba(194,144,80,0.03); }
 
-.verbatim-card blockquote {
-  font-family: var(--font-d);
+.verbatim-q {
+  font-family: var(--fd);
   font-style: italic;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--text);
-  margin-bottom: 1.25rem;
-  position: relative;
-}
-
-.verbatim-card blockquote strong {
-  color: var(--gold);
-  font-style: normal;
-}
-
-.verbatim-sub {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 1.25rem;
-}
-
-.verbatim-card cite {
-  display: block;
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  letter-spacing: 0.08em;
-  border-top: 1px solid var(--gold-border);
-  padding-top: 1rem;
-}
-
-/* ═══════════════════════════════════════
-   S5 — WHY PEOPLE STAY STUCK
-═══════════════════════════════════════ */
-.stuck {
-  background: var(--dark);
-}
-
-.stuck .section-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: center;
-}
-
-.stuck-text h2 {
-  font-family: var(--font-d);
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-weight: 400;
-  line-height: 1.2;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  line-height: 1.5;
+  color: var(--cream);
   margin-bottom: 1.5rem;
 }
 
-.stuck-text p {
-  font-size: 0.95rem;
-  color: var(--text-muted);
+.verbatim-q strong {
+  font-style: normal;
+  color: var(--gold);
+}
+
+.verbatim-body {
+  font-size: 0.83rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+
+.verbatim-cite {
+  font-size: 0.72rem;
+  color: var(--dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+
+/* ════════════════════════════════════════════
+   S5 — STUCK (diagonal layout)
+════════════════════════════════════════════ */
+.stuck {
+  background: var(--black);
+  position: relative;
+}
+
+.stuck-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8rem;
+  align-items: start;
+}
+
+.stuck-left h2 {
+  font-family: var(--fd);
+  font-size: clamp(2.5rem, 4.5vw, 5rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+  margin-bottom: 2rem;
+}
+
+.stuck-left p {
+  font-size: 0.93rem;
+  color: var(--muted);
   line-height: 1.85;
   margin-bottom: 0.75rem;
 }
 
-.stuck-text p strong {
-  color: var(--text);
-  font-weight: 400;
+.stuck-left p strong { color: var(--cream); font-weight: 400; }
+
+.stuck-right {
+  padding-top: 5rem;
 }
 
-.stuck-list {
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
+.stuck-items { display: flex; flex-direction: column; gap: 0; }
 
 .stuck-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 1rem 1.25rem;
-  border: 1px solid var(--gold-border);
-  background: var(--dark-2);
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 1.5rem;
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--border);
+  align-items: start;
 }
 
-.stuck-item-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--gold);
-  margin-top: 0.55rem;
-  flex-shrink: 0;
+.stuck-n {
+  font-family: var(--fd);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--dim);
+  padding-top: 0.2rem;
 }
 
 .stuck-item p {
   font-size: 0.88rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
 }
 
-/* ═══════════════════════════════════════
-   S6 — WHAT ACTUALLY WORKS (Dimensions)
-═══════════════════════════════════════ */
-.works {
-  background: var(--dark-3);
-}
-
-.works h2 {
-  font-family: var(--font-d);
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-}
-
-.works-intro {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  max-width: 56ch;
-  line-height: 1.8;
-  margin-bottom: 3rem;
-}
-
-.dimensions-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1.5px;
-  border: 1.5px solid var(--gold-border);
-  margin-bottom: 3rem;
-}
-
-.dimension {
-  background: var(--dark-4);
-  padding: 1.75rem 1.25rem;
-  text-align: center;
-  transition: background 0.3s;
-  cursor: default;
-}
-
-.dimension:hover { background: var(--mid); }
-
-.dimension-icon {
-  font-family: var(--font-d);
-  font-size: 1.8rem;
-  color: var(--gold);
-  margin-bottom: 0.75rem;
-  line-height: 1;
-}
-
-.dimension-name {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text);
-  margin-bottom: 0.5rem;
-}
-
-.dimension-desc {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  line-height: 1.5;
-}
-
-.works-cta {
-  text-align: center;
-}
-
-.works-note {
-  font-size: 0.82rem;
-  color: var(--text-dim);
-  margin-top: 1rem;
-}
-
-/* ═══════════════════════════════════════
-   S7 — THREE CONTENT CARDS (New)
-═══════════════════════════════════════ */
+/* ════════════════════════════════════════════
+   S6 — METHOD (three large columns)
+════════════════════════════════════════════ */
 .method {
-  background: var(--dark-2);
+  background: var(--dark);
 }
 
-.method-intro {
-  text-align: center;
-  max-width: 580px;
-  margin: 0 auto 4rem;
+.method-head {
+  margin-bottom: 5rem;
 }
 
-.method-intro h2 {
-  font-family: var(--font-d);
-  font-size: clamp(2rem, 3.5vw, 3rem);
+.method-head h2 {
+  font-family: var(--fd);
+  font-size: clamp(2.5rem, 5vw, 6rem);
   font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: 1rem;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--cream);
 }
 
-.method-intro h2 em {
+.method-head h2 em {
   font-style: italic;
   color: var(--gold);
-}
-
-.method-intro p {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.8;
 }
 
 .method-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5px;
-  border: 1.5px solid var(--gold-border);
+  gap: 0;
+  border: 1px solid var(--border);
 }
 
 .method-card {
-  background: var(--dark-3);
-  padding: 2.5rem 2rem 2rem;
+  padding: 3rem 2.5rem;
+  border-right: 1px solid var(--border);
   position: relative;
-  overflow: hidden;
   transition: background 0.3s;
 }
 
-.method-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--gold);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-}
+.method-card:last-child { border-right: none; }
+.method-card:hover { background: rgba(194,144,80,0.03); }
 
-.method-card:hover { background: var(--mid); }
-.method-card:hover::before { transform: scaleX(1); }
-
-.method-num {
-  font-family: var(--font-d);
-  font-size: 4rem;
+.method-n {
+  font-family: var(--fd);
+  font-size: 5rem;
   font-weight: 700;
-  color: var(--gold-dim);
+  color: rgba(194,144,80,0.10);
   line-height: 1;
-  margin-bottom: 1.5rem;
-  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+  letter-spacing: -0.03em;
 }
 
-.method-card .label { margin-bottom: 0.5rem; }
+.method-tag {
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.25rem;
+  display: block;
+}
 
 .method-card h3 {
-  font-family: var(--font-d);
-  font-size: 1.3rem;
+  font-family: var(--fd);
+  font-size: clamp(1.2rem, 1.8vw, 1.6rem);
   font-weight: 400;
-  line-height: 1.3;
-  color: var(--text);
-  margin-bottom: 1rem;
+  line-height: 1.2;
+  color: var(--cream);
+  margin-bottom: 1.25rem;
 }
 
 .method-card p {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
+  color: var(--muted);
   line-height: 1.8;
-  color: var(--text-muted);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.65rem;
 }
 
-.method-quote {
-  border-left: 1.5px solid var(--gold);
+.method-qt {
+  margin-top: 2rem;
+  border-left: 1px solid var(--gold);
   padding-left: 1rem;
-  margin-top: 1.5rem;
 }
 
-.method-quote p {
-  font-family: var(--font-d);
+.method-qt p {
+  font-family: var(--fd);
   font-style: italic;
-  font-size: 0.84rem;
-  color: var(--text-dim);
+  font-size: 0.82rem;
+  color: var(--muted);
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
-.method-quote cite {
+.method-qt cite {
   display: block;
-  font-family: var(--font-b);
+  font-family: var(--fb);
   font-style: normal;
-  font-size: 0.73rem;
-  color: var(--text-dim);
-  margin-top: 0.5rem;
-  letter-spacing: 0.05em;
+  font-size: 0.7rem;
+  color: var(--dim);
+  margin-top: 0.4rem;
+  letter-spacing: 0.06em;
 }
 
-/* ═══════════════════════════════════════
-   S8 — EMAIL CAPTURE (New)
-═══════════════════════════════════════ */
-.email-capture {
-  background: var(--dark);
+/* ════════════════════════════════════════════
+   S7 — EMAIL (stark, full width)
+════════════════════════════════════════════ */
+.capture {
+  background: var(--off);
   position: relative;
   overflow: hidden;
 }
 
-.email-capture::before {
-  content: '';
+/* Large ghost text background */
+.capture-ghost {
   position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(194,144,80,0.06) 0%, transparent 65%);
+  bottom: -4rem;
+  right: -1rem;
+  font-family: var(--fd);
+  font-size: clamp(10rem, 22vw, 30rem);
+  font-weight: 700;
+  line-height: 0.85;
+  color: rgba(194,144,80,0.04);
   pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.04em;
 }
 
-.email-capture .section-inner {
-  max-width: 640px;
-  text-align: center;
+.capture-inner {
   position: relative;
   z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8rem;
+  align-items: start;
 }
 
-.email-capture h2 {
-  font-family: var(--font-d);
-  font-size: clamp(2rem, 3.5vw, 3rem);
+.capture-left h2 {
+  font-family: var(--fd);
+  font-size: clamp(2.5rem, 5vw, 6rem);
   font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: 1rem;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+  margin-bottom: 2rem;
 }
 
-.email-capture h2 em {
+.capture-left h2 em {
   font-style: italic;
   color: var(--gold);
 }
 
-.email-capture .subhead {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.8;
-  max-width: 46ch;
-  margin: 0 auto 0.6rem;
-}
-
-.trust-line {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  margin-bottom: 2.5rem;
-  letter-spacing: 0.03em;
-}
-
-.email-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-  max-width: 420px;
-  margin: 0 auto 2.5rem;
-}
-
-.email-form input {
-  background: var(--dark-3);
-  border: 1px solid var(--gold-border);
-  color: var(--text);
-  font-family: var(--font-b);
+.capture-left p {
   font-size: 0.9rem;
-  font-weight: 300;
-  padding: 0.9rem 1.1rem;
-  outline: none;
-  transition: border-color 0.2s;
-  -webkit-appearance: none;
-  border-radius: 0;
-  width: 100%;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 38ch;
+  margin-bottom: 0.65rem;
 }
 
-.email-form input::placeholder { color: var(--text-dim); }
-.email-form input:focus { border-color: var(--gold); }
-
-.email-form .btn-primary {
-  width: 100%;
-  justify-content: center;
+.capture-trust {
+  font-size: 0.72rem;
+  color: var(--dim);
+  letter-spacing: 0.05em;
+  margin-top: 1.5rem;
 }
 
-.reassurance {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: 560px;
-  margin: 0 auto;
-  text-align: left;
-}
-
-.reassurance-item {
-  border-top: 1px solid var(--gold-border);
+.capture-right {
   padding-top: 1rem;
 }
 
-.reassurance-item .r-label {
-  font-size: 9px;
+.capture-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.capture-form input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--cream);
+  font-family: var(--fb);
+  font-size: 1rem;
+  font-weight: 300;
+  padding: 1.25rem 0;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.capture-form input::placeholder { color: var(--dim); }
+.capture-form input:focus { border-bottom-color: var(--gold); }
+
+.capture-form .btn-submit {
+  margin-top: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--gold);
+  color: var(--black);
+  font-family: var(--fb);
+  font-size: 9.5px;
   font-weight: 500;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 1.1rem 1.75rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.capture-form .btn-submit:hover { background: var(--gold-l); }
+
+.capture-form .btn-submit .arrow { font-size: 1.1rem; }
+
+/* Reassurance items */
+.capture-re {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+}
+
+.re-item .re-label {
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 0.4rem;
+  display: block;
 }
 
-.reassurance-item p {
-  font-size: 0.78rem;
+.re-item p {
+  font-size: 0.75rem;
+  color: var(--dim);
   line-height: 1.6;
-  color: var(--text-dim);
 }
 
 .success-state {
   display: none;
-  border: 1px solid var(--gold-border);
-  padding: 2rem;
-  max-width: 420px;
-  margin: 0 auto;
+  padding: 2rem 0;
 }
 
 .success-state h3 {
-  font-family: var(--font-d);
-  font-size: 1.4rem;
+  font-family: var(--fd);
+  font-size: 2rem;
   font-weight: 400;
   color: var(--gold);
   margin-bottom: 0.75rem;
 }
 
-.success-state p {
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-}
+.success-state p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
 
-/* ═══════════════════════════════════════
+/* ════════════════════════════════════════════
    FOOTER
-═══════════════════════════════════════ */
+════════════════════════════════════════════ */
 footer {
-  background: var(--dark-2);
-  border-top: 1px solid var(--gold-border);
-  padding: 3rem var(--pad);
-}
-
-.footer-inner {
-  max-width: var(--max);
-  margin: 0 auto;
+  background: var(--black);
+  border-top: 1px solid var(--border);
+  padding: 2.5rem var(--pad);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -941,489 +1020,478 @@ footer {
 .footer-logo {
   font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--gold);
 }
 
-.footer-logo span { color: var(--text-dim); font-weight: 300; }
+.footer-logo span { color: var(--dim); }
 
-.footer-copy {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  letter-spacing: 0.03em;
-}
+.footer-copy { font-size: 0.72rem; color: var(--dim); letter-spacing: 0.04em; }
 
 .footer-link {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  letter-spacing: 0.03em;
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
   transition: color 0.2s;
 }
 
 .footer-link:hover { color: var(--gold); }
 
-/* ═══════════════════════════════════════
-   ANIMATIONS
-═══════════════════════════════════════ */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(1); }
-  50%       { opacity: 1;   transform: scaleY(1.1); }
-}
-
-/* Scroll-reveal */
+/* ════════════════════════════════════════════
+   SCROLL REVEAL
+════════════════════════════════════════════ */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(32px);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
 }
-.reveal.visible {
+
+.reveal.up {
   opacity: 1;
   transform: none;
 }
 
-/* ═══════════════════════════════════════
+/* ════════════════════════════════════════════
+   ANIMATIONS
+════════════════════════════════════════════ */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes lineRise {
+  from { opacity: 0; transform: translateY(110%); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ════════════════════════════════════════════
    RESPONSIVE
-═══════════════════════════════════════ */
-@media (max-width: 900px) {
-  .quiet-strain .section-inner,
-  .discover .section-inner,
-  .stuck .section-inner { grid-template-columns: 1fr; gap: 3rem; }
-
-  .verbatims-grid,
-  .method-grid { grid-template-columns: 1fr; }
-
-  .dimensions-grid { grid-template-columns: repeat(3, 1fr); }
-
-  .reassurance { grid-template-columns: 1fr; gap: 1.25rem; }
+════════════════════════════════════════════ */
+@media (max-width: 1000px) {
+  .hero-bottom    { grid-template-columns: 1fr; }
+  .hero-stat      { text-align: left; }
+  .strain-inner   { grid-template-columns: 1fr; }
+  .strain-index   { font-size: 8rem; }
+  .strain-body    { grid-template-columns: 1fr; }
+  .scorecard-inner,
+  .stuck-inner,
+  .capture-inner  { grid-template-columns: 1fr; gap: 4rem; }
+  .verbatims-grid { grid-template-columns: 1fr; }
+  .verbatim       { border-right: none; border-bottom: 1px solid var(--border); }
+  .method-grid    { grid-template-columns: 1fr; }
+  .method-card    { border-right: none; border-bottom: 1px solid var(--border); }
+  .capture-re     { grid-template-columns: 1fr; }
+  .stuck-right    { padding-top: 0; }
 }
 
 @media (max-width: 600px) {
-  .dimensions-grid { grid-template-columns: repeat(2, 1fr); }
-  .verbatims-grid { grid-template-columns: 1fr; }
-  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .verbatims-head { flex-direction: column; gap: 1rem; }
+  footer          { flex-direction: column; align-items: flex-start; }
+  .cursor, .cursor-ring { display: none; }
 }
 </style>
 </head>
 <body>
 
-<!-- ═══ NAV ═══ -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
 <nav>
-  <div class="nav-logo">GenX<span>plore</span>™️</div>
-  <a href="https://scorecard.genxplore.com/" class="nav-cta">
-    <svg viewBox="0 0 16 16"><path d="M8 0l1.8 5.5H16l-4.9 3.6 1.8 5.5L8 11l-4.9 3.6 1.8-5.5L0 5.5h6.2z"/></svg>
-    Take the Test
-  </a>
+  <div class="nav-logo">GenX<span>plore</span>™</div>
+  <div class="nav-right">
+    <a href="#method" class="nav-link">Method</a>
+    <a href="#scorecard" class="nav-link">Scorecard</a>
+    <a href="https://scorecard.genxplore.com/" class="nav-cta">Take the Test</a>
+  </div>
 </nav>
 
-<!-- ═══ HERO ═══ -->
+<!-- HERO -->
 <section class="hero">
+  <div class="hero-bg-num" aria-hidden="true">II</div>
   <div class="hero-inner">
-    <div class="hero-eyebrow">
-      <span>GenXplore™️ &nbsp;·&nbsp; The Second Act Scorecard</span>
+    <div class="hero-kicker">
+      <span>GenXplore™ &nbsp;·&nbsp; The Second Act Scorecard</span>
     </div>
-    <h1>You built a career.<br>You built a life.<br><em>Now what?</em></h1>
-    <p class="hero-sub">GenXplore is for Generation X who sense a shift or feel adrift, and want to take control of what comes next. It takes just 3 minutes to get clear on what's actually holding you back.</p>
-    <div class="hero-actions">
-      <a href="https://scorecard.genxplore.com/" class="btn-primary">
-        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l1.8 5.5H16l-4.9 3.6 1.8 5.5L8 11l-4.9 3.6 1.8-5.5L0 5.5h6.2z"/></svg>
-        Start 3-Min Test
-      </a>
-      <span class="hero-note">Free · No signup required</span>
-    </div>
-  </div>
-  <div class="scroll-hint">
-    <div class="scroll-hint-line"></div>
-    <span>Scroll</span>
-  </div>
-</section>
-
-<!-- ═══ S1 — STILL EVERYONE'S ROCK ═══ -->
-<section class="quiet-strain">
-  <div class="section-inner">
-    <div class="quiet-strain-text reveal">
-      <span class="label">The Quiet Strain</span>
-      <h2>Still everyone's rock</h2>
-      <div class="rule"></div>
-      <p>You're the perennial handyman. The glue guy. The one who keeps the wheels from falling off.</p>
-      <p>You're managing a high-stakes career. Supporting aging parents. Guiding adult kids who still need a compass.</p>
-      <p>You're holding it all together.</p>
-      <p><strong>But who's holding space for you?</strong></p>
-      <p>You're not failing. You're fading. And you start to wonder — is there any room left for who you used to be? Or the person you still want to become?</p>
-    </div>
-    <div class="quiet-strain-visual reveal">
-      <p>"I did everything right. Now it feels like I'm just checking boxes. Good job. Stable income. Family taken care of. But there are days when I wake up and wonder — I don't even know what I want anymore."</p>
-      <cite>— Carlos, 51, Bank Executive</cite>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ S2 — RECLAIM YOUR MEANING ═══ -->
-<section class="reclaim">
-  <div class="section-inner reveal">
-    <span class="label" style="text-align:center;display:block;">The Journey Inwards</span>
-    <h2>Reclaim your meaning</h2>
-    <div class="rule rule-center"></div>
-    <p>This isn't about being selfish. It's about being sustainable.</p>
-    <p>You can't keep carrying everyone else's version of success. At some point, something has to give.</p>
-    <p>This isn't burnout. And it's not a crisis of competence. It's a quiet realization — <strong>you can't keep spending your energy on things that no longer matter.</strong></p>
-    <p>It's time to define what "good enough" looks like on your terms. Not theirs.</p>
-  </div>
-</section>
-
-<!-- ═══ S3 — DISCOVER YOUR PROFILE ═══ -->
-<section class="discover">
-  <div class="section-inner">
-    <div class="discover-text reveal">
-      <span class="label">The Second Act Scorecard</span>
-      <h2>Discover your profile</h2>
-      <div class="rule"></div>
-      <p>You've spent decades building a career. But the momentum of the past won't carry you into the future.</p>
-      <p>This isn't a silver bullet. And it's not about reinventing yourself overnight. It's about seeing where you are now and what's holding you back — so you can decide, with intention, where to go next.</p>
-      <p><strong>The Second Act Scorecard™️</strong> is a free, proprietary tool designed to give you that clarity. Three minutes. Six dimensions. One clear result.</p>
-      <div class="discover-cta">
-        <a href="https://scorecard.genxplore.com/" class="btn-primary">
-          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l1.8 5.5H16l-4.9 3.6 1.8 5.5L8 11l-4.9 3.6 1.8-5.5L0 5.5h6.2z"/></svg>
-          Take the 3-Min Test
-        </a>
+    <h1 class="hero-h1">
+      <span class="line"><span>You built a career.</span></span>
+      <span class="line"><span>You built a life.</span></span>
+      <span class="line"><span><em>Now what?</em></span></span>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-desc">For Generation X who sense a shift or feel adrift — and want to take control of what comes next. Three minutes to discover what's actually holding you back.</p>
+      <div class="hero-cta-wrap">
+        <a href="https://scorecard.genxplore.com/" class="btn-hero">Start 3-Min Test</a>
+        <span class="btn-hero-note">Free · No signup required</span>
       </div>
-    </div>
-    <div class="discover-radar reveal">
-      <!-- Decorative radar chart -->
-      <div class="radar-ring">
-        <svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <style>
-              .radar-bg { fill: none; stroke: rgba(194,144,80,0.1); stroke-width: 1; }
-              .radar-spoke { stroke: rgba(194,144,80,0.12); stroke-width: 1; }
-              .radar-area { fill: rgba(194,144,80,0.15); stroke: #C29050; stroke-width: 1.5; }
-              .radar-dot { fill: #C29050; }
-            </style>
-          </defs>
-          <!-- Rings -->
-          <polygon class="radar-bg" points="130,30 208,80 208,180 130,230 52,180 52,80"/>
-          <polygon class="radar-bg" points="130,55 192,93 192,167 130,205 68,167 68,93"/>
-          <polygon class="radar-bg" points="130,80 176,106 176,154 130,180 84,154 84,106"/>
-          <polygon class="radar-bg" points="130,105 160,119 160,141 130,155 100,141 100,119"/>
-          <!-- Spokes -->
-          <line class="radar-spoke" x1="130" y1="30" x2="130" y2="230"/>
-          <line class="radar-spoke" x1="208" y1="80" x2="52" y2="180"/>
-          <line class="radar-spoke" x1="208" y1="180" x2="52" y2="80"/>
-          <!-- Data area (sample scores) -->
-          <polygon class="radar-area" points="130,52 193,96 188,162 130,198 76,158 72,90"/>
-          <!-- Dots -->
-          <circle class="radar-dot" cx="130" cy="52" r="4"/>
-          <circle class="radar-dot" cx="193" cy="96" r="4"/>
-          <circle class="radar-dot" cx="188" cy="162" r="4"/>
-          <circle class="radar-dot" cx="130" cy="198" r="4"/>
-          <circle class="radar-dot" cx="76" cy="158" r="4"/>
-          <circle class="radar-dot" cx="72" cy="90" r="4"/>
-          <!-- Center -->
-          <circle cx="130" cy="130" r="2" fill="rgba(194,144,80,0.4)"/>
-        </svg>
-      </div>
-      <div class="radar-labels">
-        <div class="radar-label active">Clarity</div>
-        <div class="radar-label active">Capital</div>
-        <div class="radar-label active">Confidence</div>
-        <div class="radar-label active">Capacity</div>
-        <div class="radar-label active">Courage</div>
-        <div class="radar-label active">Connection</div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">6</div>
+        <div class="hero-stat-label">Dimensions<br>One result</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ S4 — VERBATIMS ═══ -->
-<section class="verbatims">
-  <div class="section-inner">
-    <div class="section-header reveal">
-      <span class="label">Verbatims</span>
-      <h2>You are not alone in this</h2>
-    </div>
-    <div class="verbatims-grid">
-      <div class="verbatim-card reveal">
-        <blockquote>"I did everything right. Now it feels like I'm just <strong>checking boxes.</strong>"</blockquote>
-        <p class="verbatim-sub">Good job. Stable income. Family taken care of. You did what was expected. You kept things moving. But there are days when I wake up and wonder — I don't even know what I want anymore.</p>
-        <cite>— Carlos, 51, Bank Executive</cite>
-      </div>
-      <div class="verbatim-card reveal">
-        <blockquote>"I keep doing the math but the numbers don't add up... <strong>It scares me.</strong>"</blockquote>
-        <p class="verbatim-sub">I'm 46 now. Maybe I've got 15, 20 years left. Time just moves so fast these days. I don't want to spend it doing the same thing. But starting over? That's scary.</p>
-        <cite>— Jun, 45, IT Consultant</cite>
-      </div>
-      <div class="verbatim-card reveal">
-        <blockquote>"I finally have the time and space… but I don't know <strong>what to do.</strong>"</blockquote>
-        <p class="verbatim-sub">My youngest moved out. I cried for days. Not because I'm sad. But because I can finally breathe. The thing is, I don't know who I am anymore outside of being mom or employee.</p>
-        <cite>— Dina, 47, HR Manager</cite>
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Clarity</span>
+    <span class="marquee-item">Capital</span>
+    <span class="marquee-item">Confidence</span>
+    <span class="marquee-item">Capacity</span>
+    <span class="marquee-item">Courage</span>
+    <span class="marquee-item">Connection</span>
+    <span class="marquee-item">The Second Act</span>
+    <span class="marquee-item">7C Framework</span>
+    <span class="marquee-item">Bespoke Result</span>
+    <span class="marquee-item">3 Minutes</span>
+    <span class="marquee-item">Clarity</span>
+    <span class="marquee-item">Capital</span>
+    <span class="marquee-item">Confidence</span>
+    <span class="marquee-item">Capacity</span>
+    <span class="marquee-item">Courage</span>
+    <span class="marquee-item">Connection</span>
+    <span class="marquee-item">The Second Act</span>
+    <span class="marquee-item">7C Framework</span>
+    <span class="marquee-item">Bespoke Result</span>
+    <span class="marquee-item">3 Minutes</span>
+  </div>
+</div>
+
+<!-- S1 — THE STRAIN -->
+<section class="section strain">
+  <div class="strain-inner">
+    <div class="strain-index reveal" aria-hidden="true">01</div>
+    <div class="strain-content">
+      <div class="section-label reveal">The Quiet Strain</div>
+      <h2 class="strain-h2 reveal">Still<br>everyone's<br>rock.</h2>
+      <div class="strain-body">
+        <div class="reveal">
+          <p class="strain-p">You're the perennial handyman. The glue guy. The one who keeps the wheels from falling off. Managing a high-stakes career. Supporting aging parents. Guiding adult kids who still need a compass.</p>
+          <p class="strain-p" style="margin-top:1rem;">You're holding it all together. <strong>But who's holding space for you?</strong></p>
+          <p class="strain-p" style="margin-top:1rem;">You're not failing. You're fading. And you start to wonder — is there any room left for who you used to be?</p>
+        </div>
+        <div class="reveal">
+          <div class="strain-quote">
+            <p>"I did everything right. Now it feels like I'm just checking boxes. Good job. Stable income. Family taken care of. But there are days when I wake up and wonder — I don't even know what I want anymore."</p>
+            <cite>— Carlos, 51, Bank Executive</cite>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ S5 — WHY PEOPLE STAY STUCK ═══ -->
-<section class="stuck">
-  <div class="section-inner">
-    <div class="stuck-text reveal">
-      <span class="label">The Pattern</span>
-      <h2>Why people stay stuck</h2>
-      <div class="rule"></div>
-      <p>They try to change everything at once. Or they wait too long. Or they follow advice meant for a different stage of life.</p>
-      <p>They stay busy. But nothing really moves.</p>
+<!-- S2 — STATEMENT -->
+<section class="section statement">
+  <div class="statement-inner reveal">
+    <div class="statement-pre">The Journey Inwards</div>
+    <h2 class="statement-h2">
+      This isn't burnout.
+      <span class="ruled">It's a quiet realization — you can't keep spending your energy on things that no longer <em>matter.</em></span>
+    </h2>
+  </div>
+</section>
+
+<!-- S3 — SCORECARD -->
+<section class="section scorecard" id="scorecard">
+  <div class="scorecard-inner">
+    <div class="scorecard-text reveal">
+      <div class="section-label">The Second Act Scorecard</div>
+      <h2>Discover<br>your<br>profile.</h2>
+      <p>Three minutes. Six dimensions. One clear result. The Scorecard maps exactly where you are — and shows you what to focus on first.</p>
+      <p><strong>The Second Act Scorecard™</strong> is a free, proprietary tool. No pitch on the other side. Just the diagnosis, delivered straight.</p>
+      <div class="scorecard-cta">
+        <a href="https://scorecard.genxplore.com/" class="btn-hero" style="display:inline-block;padding:1.1rem 2.5rem;width:auto;">Take the 3-Min Test</a>
+      </div>
+    </div>
+    <div class="scorecard-dims reveal">
+      <div class="dim-row">
+        <div class="dim-row-left">
+          <span class="dim-num">01</span>
+          <div>
+            <div class="dim-name">Clarity</div>
+            <div class="dim-desc">Direction & purpose</div>
+          </div>
+        </div>
+        <div class="dim-bar"></div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-row-left">
+          <span class="dim-num">02</span>
+          <div>
+            <div class="dim-name">Capital</div>
+            <div class="dim-desc">Financial resources</div>
+          </div>
+        </div>
+        <div class="dim-bar"></div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-row-left">
+          <span class="dim-num">03</span>
+          <div>
+            <div class="dim-name">Confidence</div>
+            <div class="dim-desc">Identity & self-worth</div>
+          </div>
+        </div>
+        <div class="dim-bar"></div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-row-left">
+          <span class="dim-num">04</span>
+          <div>
+            <div class="dim-name">Capacity</div>
+            <div class="dim-desc">Bandwidth & energy</div>
+          </div>
+        </div>
+        <div class="dim-bar"></div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-row-left">
+          <span class="dim-num">05</span>
+          <div>
+            <div class="dim-name">Courage</div>
+            <div class="dim-desc">Fear & risk</div>
+          </div>
+        </div>
+        <div class="dim-bar"></div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-row-left">
+          <span class="dim-num">06</span>
+          <div>
+            <div class="dim-name">Connection</div>
+            <div class="dim-desc">Network & community</div>
+          </div>
+        </div>
+        <div class="dim-bar"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S4 — VERBATIMS -->
+<section class="section verbatims">
+  <div class="verbatims-head reveal">
+    <h2>You are not<br>alone in this.</h2>
+    <span class="verbatims-count">03 voices</span>
+  </div>
+  <div class="verbatims-grid reveal">
+    <div class="verbatim">
+      <p class="verbatim-q">"I did everything right. Now it feels like I'm just <strong>checking boxes.</strong>"</p>
+      <p class="verbatim-body">Good job. Stable income. Family taken care of. You did what was expected. But there are days when you wonder — I don't even know what I want anymore.</p>
+      <cite class="verbatim-cite">Carlos, 51 — Bank Executive</cite>
+    </div>
+    <div class="verbatim">
+      <p class="verbatim-q">"The numbers don't add up. <strong>It scares me.</strong>"</p>
+      <p class="verbatim-body">I'm 46 now. Maybe 15, 20 years left. I don't want to spend it doing the same thing. But starting over? That's scary.</p>
+      <cite class="verbatim-cite">Jun, 45 — IT Consultant</cite>
+    </div>
+    <div class="verbatim">
+      <p class="verbatim-q">"I finally have the space — but I don't know <strong>what to do.</strong>"</p>
+      <p class="verbatim-body">My youngest moved out. I can finally breathe. But I don't know who I am anymore outside of being mom or employee.</p>
+      <cite class="verbatim-cite">Dina, 47 — HR Manager</cite>
+    </div>
+  </div>
+</section>
+
+<!-- S5 — STUCK -->
+<section class="section stuck">
+  <div class="stuck-inner">
+    <div class="stuck-left reveal">
+      <div class="section-label">The Pattern</div>
+      <h2>Why people<br>stay stuck.</h2>
+      <p>They try to change everything at once. Or wait too long. Or follow advice meant for a different stage of life.</p>
+      <p>They stay busy. But nothing moves.</p>
       <p><strong>Because they're solving the wrong problem.</strong></p>
     </div>
-    <div class="stuck-list reveal">
-      <div class="stuck-item">
-        <div class="stuck-item-dot"></div>
-        <p>They change tactics without identifying the primary constraint — so the same ceiling reappears in a different room.</p>
-      </div>
-      <div class="stuck-item">
-        <div class="stuck-item-dot"></div>
-        <p>They take advice designed for 25-year-olds entering the market — not for someone with 30 years of accumulated intelligence.</p>
-      </div>
-      <div class="stuck-item">
-        <div class="stuck-item-dot"></div>
-        <p>They mistake motion for progress — staying busy while the real bottleneck goes unnamed and unaddressed.</p>
-      </div>
-      <div class="stuck-item">
-        <div class="stuck-item-dot"></div>
-        <p>They wait for the right moment — which is a strategy for remaining exactly where they are.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ S6 — WHAT ACTUALLY WORKS ═══ -->
-<section class="works">
-  <div class="section-inner">
-    <div class="section-header reveal">
-      <span class="label">The Shift</span>
-      <h2>What actually works</h2>
-      <p class="works-intro">The Second Act Scorecard maps your current state across six dimensions. Then shows you what to focus on first — so you stop guessing and start moving with direction.</p>
-    </div>
-    <div class="dimensions-grid reveal">
-      <div class="dimension">
-        <div class="dimension-icon">◈</div>
-        <div class="dimension-name">Clarity</div>
-        <div class="dimension-desc">Direction & purpose</div>
-      </div>
-      <div class="dimension">
-        <div class="dimension-icon">◈</div>
-        <div class="dimension-name">Capital</div>
-        <div class="dimension-desc">Financial resources</div>
-      </div>
-      <div class="dimension">
-        <div class="dimension-icon">◈</div>
-        <div class="dimension-name">Confidence</div>
-        <div class="dimension-desc">Identity & self-worth</div>
-      </div>
-      <div class="dimension">
-        <div class="dimension-icon">◈</div>
-        <div class="dimension-name">Capacity</div>
-        <div class="dimension-desc">Bandwidth & energy</div>
-      </div>
-      <div class="dimension">
-        <div class="dimension-icon">◈</div>
-        <div class="dimension-name">Courage</div>
-        <div class="dimension-desc">Fear & risk</div>
-      </div>
-      <div class="dimension">
-        <div class="dimension-icon">◈</div>
-        <div class="dimension-name">Connection</div>
-        <div class="dimension-desc">Network & community</div>
-      </div>
-    </div>
-    <div class="works-cta reveal">
-      <a href="https://scorecard.genxplore.com/" class="btn-primary">
-        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l1.8 5.5H16l-4.9 3.6 1.8 5.5L8 11l-4.9 3.6 1.8-5.5L0 5.5h6.2z"/></svg>
-        Discover Your Primary Constraint
-      </a>
-      <p class="works-note">Free · 3 minutes · No pitch on the other side</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ S7 — THREE CONTENT CARDS (Replaces Lorem Ipsum) ═══ -->
-<section class="method">
-  <div class="section-inner">
-    <div class="method-intro reveal">
-      <span class="label">The Method</span>
-      <h2>Three moves.<br><em>In the right order.</em></h2>
-      <p>Most Gen X professionals aren't lost. They're solving the wrong problem first. The Second Act Scorecard tells you which move is yours — and what to do with it.</p>
-    </div>
-    <div class="method-grid">
-      <div class="method-card reveal">
-        <div class="method-num">01</div>
-        <div class="label">The First Move</div>
-        <h3>Deconstruct what no longer fits</h3>
-        <p>The First Act was built from someone else's instructions. A job title, a family expectation, a cultural script. The Lifequake is your life getting smart on your behalf — signalling that the build has hit its structural limit.</p>
-        <p>This move isn't about loss. It's about seeing clearly what's actually there — and what's been sitting on top of what matters most.</p>
-        <div class="method-quote">
-          <p>"I didn't choose the Deconstruct. It chose me. That reframe changed everything."</p>
-          <cite>— Diane L., 57, Melbourne</cite>
+    <div class="stuck-right reveal">
+      <div class="stuck-items">
+        <div class="stuck-item">
+          <span class="stuck-n">01</span>
+          <p>They change tactics without identifying the primary constraint — so the same ceiling reappears in a different room.</p>
         </div>
-      </div>
-      <div class="method-card reveal">
-        <div class="method-num">02</div>
-        <div class="label">The Second Move</div>
-        <h3>Design from the inside out</h3>
-        <p>A Bespoke Second Act doesn't require leaving your job, starting a business, or achieving any particular outcome. It requires that the life you're living was deliberately chosen — not defaulted into.</p>
-        <p>Design is the Wisdom Sort: 30 years of accumulated intelligence, pattern recognition, and hard-won clarity — finally aimed at your own life.</p>
-        <div class="method-quote">
-          <p>"18 years of contract law turned out to be a rare asset in the nonprofit sector. I couldn't see it until someone showed me the inventory."</p>
-          <cite>— Marcus J., 46, Atlanta</cite>
+        <div class="stuck-item">
+          <span class="stuck-n">02</span>
+          <p>They take advice designed for 25-year-olds — not for someone with 30 years of accumulated intelligence.</p>
         </div>
-      </div>
-      <div class="method-card reveal">
-        <div class="method-num">03</div>
-        <div class="label">The Third Move</div>
-        <h3>Dominate means placing the first brick</h3>
-        <p>Not conquer the market. Not reinvent yourself overnight. Dominate means internal sovereignty — putting the first deliberate action on the board and watching what it reveals about the next one.</p>
-        <p>The Scorecard identifies your exact constraint. The track resolves it. One node at a time, in the right sequence, with binary gates that hold.</p>
-        <div class="method-quote">
-          <p>"Yes or No — did you do it or not? That's the opposite of everything I've been through before."</p>
-          <cite>— Karen W., 54, Toronto</cite>
+        <div class="stuck-item">
+          <span class="stuck-n">03</span>
+          <p>They mistake motion for progress — busy while the real bottleneck goes unnamed and unaddressed.</p>
+        </div>
+        <div class="stuck-item">
+          <span class="stuck-n">04</span>
+          <p>They wait for the right moment — which is a strategy for remaining exactly where they are.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ S8 — EMAIL CAPTURE (Replaces Lorem Ipsum subscribe) ═══ -->
-<section class="email-capture">
-  <div class="section-inner">
-    <span class="label" style="display:block;">Not ready for the test?</span>
-    <h2>Start with<br><em>one question.</em></h2>
-    <p class="subhead">Before the Scorecard, before the system — there's a single question worth sitting with. Drop your email and we'll send it to you. No pitch. Just the question most Gen X professionals have never been asked directly.</p>
-    <p class="trust-line">3 emails over 7 days &nbsp;·&nbsp; No upsell &nbsp;·&nbsp; Unsubscribe any time</p>
-
-    <!--
-      MAILERLITE INTEGRATION:
-      Replace YOUR_MAILERLITE_FORM_ACTION_URL with your form endpoint.
-      Add hidden fields in MailerLite form builder:
-        - fields[scorecard_completed] = false
-        - fields[source] = homepage-email-only
-      Group: email-only-subscriber
-      Triggers: Brick Separator 3-email automation
-    -->
-    <form class="email-form" id="emailForm"
-          action="YOUR_MAILERLITE_FORM_ACTION_URL"
-          method="POST">
-      <input type="hidden" name="fields[scorecard_completed]" value="false">
-      <input type="hidden" name="fields[source]" value="homepage-email-only">
-      <input type="hidden" name="ml-submit" value="1">
-      <input type="text"
-             name="fields[name]"
-             placeholder="First name"
-             autocomplete="given-name"
-             required>
-      <input type="email"
-             name="fields[email]"
-             placeholder="Your email address"
-             autocomplete="email"
-             required>
-      <button type="submit" class="btn-primary">
-        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l1.8 5.5H16l-4.9 3.6 1.8 5.5L8 11l-4.9 3.6 1.8-5.5L0 5.5h6.2z"/></svg>
-        Send me the question
-      </button>
-    </form>
-
-    <div class="success-state" id="successState">
-      <h3>It's on its way.</h3>
-      <p>Check your inbox in the next few minutes. The first question lands today. The Scorecard will be waiting whenever you're ready.</p>
+<!-- S6 — METHOD -->
+<section class="section method" id="method">
+  <div class="method-head reveal">
+    <div class="section-label">The Method</div>
+    <h2>Three moves.<br><em>In the right order.</em></h2>
+  </div>
+  <div class="method-grid">
+    <div class="method-card reveal">
+      <div class="method-n">01</div>
+      <span class="method-tag">Deconstruct</span>
+      <h3>Take apart what no longer fits.</h3>
+      <p>The First Act was built from someone else's instructions. The Lifequake is your life getting smart on your behalf — signalling that the build has hit its structural limit.</p>
+      <p>This move isn't about loss. It's about seeing clearly what's actually there.</p>
+      <div class="method-qt">
+        <p>"I didn't choose the Deconstruct. It chose me. That reframe changed everything."</p>
+        <cite>— Diane L., 57, Melbourne</cite>
+      </div>
     </div>
-
-    <div class="reassurance reveal">
-      <div class="reassurance-item">
-        <div class="r-label">What you get</div>
-        <p>3 questions over 7 days — each one designed to surface what's actually underneath the restlessness.</p>
+    <div class="method-card reveal">
+      <div class="method-n">02</div>
+      <span class="method-tag">Design</span>
+      <h3>Build it from the inside out.</h3>
+      <p>A Bespoke Second Act doesn't require leaving your job or starting a business. It requires the life you're living was deliberately chosen — not defaulted into.</p>
+      <p>30 years of intelligence, finally aimed at your own life.</p>
+      <div class="method-qt">
+        <p>"18 years of contract law turned out to be a rare asset in the nonprofit sector. I couldn't see it until someone showed me the inventory."</p>
+        <cite>— Marcus J., 46, Atlanta</cite>
       </div>
-      <div class="reassurance-item">
-        <div class="r-label">What you don't get</div>
-        <p>No sales pitch. No course offer. No urgency countdown. Just the diagnosis, delivered straight.</p>
-      </div>
-      <div class="reassurance-item">
-        <div class="r-label">What comes next</div>
-        <p>When you're ready, the Scorecard is 3 minutes. The result will feel like the first thing that's described you accurately.</p>
+    </div>
+    <div class="method-card reveal">
+      <div class="method-n">03</div>
+      <span class="method-tag">Dominate</span>
+      <h3>Place the first brick.</h3>
+      <p>Not conquer the market. Dominate means internal sovereignty — putting the first deliberate action on the board and watching what it reveals about the next one.</p>
+      <p>The Scorecard identifies your exact constraint. The track resolves it.</p>
+      <div class="method-qt">
+        <p>"Yes or No — did you do it or not? That's the opposite of everything I've been through before."</p>
+        <cite>— Karen W., 54, Toronto</cite>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- S7 — EMAIL -->
+<section class="section capture">
+  <div class="capture-ghost" aria-hidden="true">SA</div>
+  <div class="capture-inner">
+    <div class="capture-left reveal">
+      <div class="section-label">Not ready for the test?</div>
+      <h2>Start with<br><em>one<br>question.</em></h2>
+      <p>Before the Scorecard, before the system — there's a single question worth sitting with. Drop your email and we'll send it to you.</p>
+      <p>No pitch. Just the question most Gen X professionals have never been asked directly.</p>
+      <p class="capture-trust">3 emails · 7 days · No upsell · Unsubscribe any time</p>
+    </div>
+    <div class="capture-right reveal">
+      <form class="capture-form" id="emailForm">
+        <input type="text" placeholder="First name" autocomplete="given-name" required>
+        <input type="email" placeholder="Email address" autocomplete="email" required>
+        <button type="submit" class="btn-submit">
+          <span>Send me the question</span>
+          <span class="arrow">→</span>
+        </button>
+      </form>
+      <div class="success-state" id="successState">
+        <h3>It's on its way.</h3>
+        <p>Check your inbox. The first question lands today. The Scorecard will be waiting whenever you're ready.</p>
+      </div>
+      <div class="capture-re">
+        <div class="re-item">
+          <span class="re-label">What you get</span>
+          <p>3 questions over 7 days — each designed to surface what's actually underneath the restlessness.</p>
+        </div>
+        <div class="re-item">
+          <span class="re-label">What you don't get</span>
+          <p>No pitch. No course offer. No countdown. Just the diagnosis, straight.</p>
+        </div>
+        <div class="re-item">
+          <span class="re-label">What comes next</span>
+          <p>When ready, the Scorecard is 3 minutes. The result will feel like the first thing that's described you accurately.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-logo">GenX<span>plore</span>™️</div>
-    <p class="footer-copy">©️ 2026 JasperEvangelista.com &nbsp;·&nbsp; GenXplore™️ &nbsp;·&nbsp; For Gen X designing what comes next.</p>
-    <a href="https://scorecard.genxplore.com/" class="footer-link">Take the Scorecard →</a>
-  </div>
+  <div class="footer-logo">GenX<span>plore</span>™</div>
+  <p class="footer-copy">© 2026 JasperEvangelista.com · GenXplore™ · For Gen X designing what comes next.</p>
+  <a href="https://scorecard.genxplore.com/" class="footer-link">Take the Scorecard →</a>
 </footer>
 
 <script>
+/* ─── Custom cursor ─── */
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cur.style.left = mx + 'px';
+  cur.style.top  = my + 'px';
+});
+
+function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cur.style.width = '14px'; cur.style.height = '14px';
+    ring.style.width = '54px'; ring.style.height = '54px';
+  });
+  el.addEventListener('mouseleave', () => {
+    cur.style.width = '8px'; cur.style.height = '8px';
+    ring.style.width = '36px'; ring.style.height = '36px';
+  });
+});
+
 /* ─── Scroll reveal ─── */
-const revealEls = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 80);
-      observer.unobserve(entry.target);
+const revEls = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('up'), i * 90);
+      obs.unobserve(e.target);
     }
   });
-}, { threshold: 0.1 });
-revealEls.forEach(el => observer.observe(el));
+}, { threshold: 0.08 });
+revEls.forEach(el => obs.observe(el));
+
+/* ─── Dim bar animation on scroll ─── */
+const dimObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.dim-bar').forEach(b => {
+        b.style.opacity = '1';
+      });
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.scorecard-dims').forEach(el => dimObs.observe(el));
 
 /* ─── Email form ─── */
 const form = document.getElementById('emailForm');
-const success = document.getElementById('successState');
-
+const succ = document.getElementById('successState');
 if (form) {
-  form.addEventListener('submit', function(e) {
+  form.addEventListener('submit', e => {
     e.preventDefault();
     const btn = form.querySelector('button');
-    btn.textContent = 'Sending...';
+    btn.querySelector('span').textContent = 'Sending…';
     btn.disabled = true;
-
-    /*
-      REPLACE THIS BLOCK with MailerLite's JS embed snippet
-      OR with a fetch() call to your MailerLite form endpoint.
-
-      MailerLite AJAX endpoint:
-      fetch('https://assets.mailerlite.com/jsonp/ACCOUNT_ID/forms/FORM_ID/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fields: {
-            name: form.querySelector('[name="fields[name]"]').value,
-            email: form.querySelector('[name="fields[email]"]').value,
-            scorecard_completed: 'false',
-            source: 'homepage-email-only'
-          },
-          groups: ['YOUR_GROUP_ID']
-        })
-      }).then(() => {
-        form.style.display = 'none';
-        success.style.display = 'block';
-      });
-    */
-
-    // Placeholder — remove once MailerLite endpoint is wired
     setTimeout(() => {
       form.style.display = 'none';
-      success.style.display = 'block';
+      succ.style.display = 'block';
     }, 900);
   });
 }
 </script>
-
 </body>
 </html>
