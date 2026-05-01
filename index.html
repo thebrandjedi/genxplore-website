@@ -852,156 +852,57 @@ nav {
 /* ════════════════════════════════════════════
    S7 — EMAIL (stark, full width)
 ════════════════════════════════════════════ */
-.capture {
+.final-cta-section {
   background: var(--off);
   position: relative;
   overflow: hidden;
+  text-align: center;
 }
 
-/* Large ghost text background */
-.capture-ghost {
+.final-cta-section::before {
+  content: "";
   position: absolute;
-  bottom: -4rem;
-  right: -1rem;
-  font-family: var(--fd);
-  font-size: clamp(10rem, 22vw, 30rem);
-  font-weight: 700;
-  line-height: 0.85;
-  color: rgba(194,144,80,0.04);
+  top: 50%; left: 50%;
+  width: 80vw; height: 80vw;
+  max-width: 900px; max-height: 900px;
+  background: radial-gradient(circle, rgba(194,144,80,0.06) 0%, transparent 60%);
+  transform: translate(-50%, -50%);
   pointer-events: none;
-  user-select: none;
-  letter-spacing: -0.04em;
 }
 
-.capture-inner {
+.final-cta-inner {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8rem;
-  align-items: start;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
-.capture-left h2 {
+.final-cta-inner .section-label {
+  margin-bottom: 2rem;
+}
+
+.final-cta-inner h2 {
   font-family: var(--fd);
-  font-size: clamp(2.5rem, 5vw, 6rem);
+  font-size: clamp(2.5rem, 5vw, 5.5rem);
   font-weight: 400;
-  line-height: 0.92;
+  line-height: 0.95;
   letter-spacing: -0.02em;
   color: var(--cream);
   margin-bottom: 2rem;
 }
 
-.capture-left h2 em {
+.final-cta-inner h2 em {
   font-style: italic;
   color: var(--gold);
 }
 
-.capture-left p {
-  font-size: 0.9rem;
+.final-cta-p {
+  font-size: 0.95rem;
   color: var(--muted);
-  line-height: 1.8;
-  max-width: 38ch;
-  margin-bottom: 0.65rem;
+  line-height: 1.7;
+  max-width: 46ch;
+  margin: 0 auto;
 }
-
-.capture-trust {
-  font-size: 0.72rem;
-  color: var(--dim);
-  letter-spacing: 0.05em;
-  margin-top: 1.5rem;
-}
-
-.capture-right {
-  padding-top: 1rem;
-}
-
-.capture-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.capture-form input {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--border);
-  color: var(--cream);
-  font-family: var(--fb);
-  font-size: 1rem;
-  font-weight: 300;
-  padding: 1.25rem 0;
-  outline: none;
-  transition: border-color 0.2s;
-  width: 100%;
-}
-
-.capture-form input::placeholder { color: var(--dim); }
-.capture-form input:focus { border-bottom-color: var(--gold); }
-
-.capture-form .btn-submit {
-  margin-top: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--gold);
-  color: var(--black);
-  font-family: var(--fb);
-  font-size: 9.5px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  padding: 1.1rem 1.75rem;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s;
-  width: 100%;
-}
-
-.capture-form .btn-submit:hover { background: var(--gold-l); }
-
-.capture-form .btn-submit .arrow { font-size: 1.1rem; }
-
-/* Reassurance items */
-.capture-re {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 3rem;
-  border-top: 1px solid var(--border);
-  padding-top: 2rem;
-}
-
-.re-item .re-label {
-  font-size: 8px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0.4rem;
-  display: block;
-}
-
-.re-item p {
-  font-size: 0.75rem;
-  color: var(--dim);
-  line-height: 1.6;
-}
-
-.success-state {
-  display: none;
-  padding: 2rem 0;
-}
-
-.success-state h3 {
-  font-family: var(--fd);
-  font-size: 2rem;
-  font-weight: 400;
-  color: var(--gold);
-  margin-bottom: 0.75rem;
-}
-
-.success-state p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
 
 /* ════════════════════════════════════════════
    FOOTER
@@ -1037,6 +938,13 @@ footer {
 }
 
 .footer-link:hover { color: var(--gold); }
+
+.footer-links {
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
 /* ════════════════════════════════════════════
    SCROLL REVEAL
@@ -1075,13 +983,11 @@ footer {
   .strain-index   { font-size: 8rem; }
   .strain-body    { grid-template-columns: 1fr; }
   .scorecard-inner,
-  .stuck-inner,
-  .capture-inner  { grid-template-columns: 1fr; gap: 4rem; }
+  .stuck-inner    { grid-template-columns: 1fr; gap: 4rem; }
   .verbatims-grid { grid-template-columns: 1fr; }
   .verbatim       { border-right: none; border-bottom: 1px solid var(--border); }
   .method-grid    { grid-template-columns: 1fr; }
   .method-card    { border-right: none; border-bottom: 1px solid var(--border); }
-  .capture-re     { grid-template-columns: 1fr; }
   .stuck-right    { padding-top: 0; }
 }
 
@@ -1103,7 +1009,7 @@ footer {
   <div class="nav-right">
     <a href="#method" class="nav-link">Method</a>
     <a href="#scorecard" class="nav-link">Scorecard</a>
-    <a href="https://scorecard.genxplore.com/" class="nav-cta">Take the Test</a>
+    <a href="https://scorecard.genxplore.com/" class="nav-cta">Take the Scorecard</a>
   </div>
 </nav>
 
@@ -1122,7 +1028,7 @@ footer {
     <div class="hero-bottom">
       <p class="hero-desc">For Generation X who sense a shift or feel adrift — and want to take control of what comes next. Three minutes to discover what's actually holding you back.</p>
       <div class="hero-cta-wrap">
-        <a href="https://scorecard.genxplore.com/" class="btn-hero">Start 3-Min Test</a>
+        <a href="https://scorecard.genxplore.com/" class="btn-hero">Start 3-Min Scorecard</a>
         <span class="btn-hero-note">Free · No signup required</span>
       </div>
       <div class="hero-stat">
@@ -1137,20 +1043,20 @@ footer {
 <div class="marquee-wrap" aria-hidden="true">
   <div class="marquee-track">
     <span class="marquee-item">Clarity</span>
-    <span class="marquee-item">Capital</span>
-    <span class="marquee-item">Confidence</span>
     <span class="marquee-item">Capacity</span>
+    <span class="marquee-item">Capital</span>
     <span class="marquee-item">Courage</span>
+    <span class="marquee-item">Confidence</span>
     <span class="marquee-item">Connection</span>
     <span class="marquee-item">The Second Act</span>
     <span class="marquee-item">7C Framework</span>
     <span class="marquee-item">Bespoke Result</span>
     <span class="marquee-item">3 Minutes</span>
     <span class="marquee-item">Clarity</span>
-    <span class="marquee-item">Capital</span>
-    <span class="marquee-item">Confidence</span>
     <span class="marquee-item">Capacity</span>
+    <span class="marquee-item">Capital</span>
     <span class="marquee-item">Courage</span>
+    <span class="marquee-item">Confidence</span>
     <span class="marquee-item">Connection</span>
     <span class="marquee-item">The Second Act</span>
     <span class="marquee-item">7C Framework</span>
@@ -1171,12 +1077,6 @@ footer {
           <p class="strain-p">You're the perennial handyman. The glue guy. The one who keeps the wheels from falling off. Managing a high-stakes career. Supporting aging parents. Guiding adult kids who still need a compass.</p>
           <p class="strain-p" style="margin-top:1rem;">You're holding it all together. <strong>But who's holding space for you?</strong></p>
           <p class="strain-p" style="margin-top:1rem;">You're not failing. You're fading. And you start to wonder — is there any room left for who you used to be?</p>
-        </div>
-        <div class="reveal">
-          <div class="strain-quote">
-            <p>"I did everything right. Now it feels like I'm just checking boxes. Good job. Stable income. Family taken care of. But there are days when I wake up and wonder — I don't even know what I want anymore."</p>
-            <cite>— Carlos, 51, Bank Executive</cite>
-          </div>
         </div>
       </div>
     </div>
@@ -1203,7 +1103,7 @@ footer {
       <p>Three minutes. Six dimensions. One clear result. The Scorecard maps exactly where you are — and shows you what to focus on first.</p>
       <p><strong>The Second Act Scorecard™</strong> is a free, proprietary tool. No pitch on the other side. Just the diagnosis, delivered straight.</p>
       <div class="scorecard-cta">
-        <a href="https://scorecard.genxplore.com/" class="btn-hero" style="display:inline-block;padding:1.1rem 2.5rem;width:auto;">Take the 3-Min Test</a>
+        <a href="https://scorecard.genxplore.com/" class="btn-hero" style="display:inline-block;padding:1.1rem 2.5rem;width:auto;">Take the 3-Min Scorecard</a>
       </div>
     </div>
     <div class="scorecard-dims reveal">
@@ -1221,26 +1121,6 @@ footer {
         <div class="dim-row-left">
           <span class="dim-num">02</span>
           <div>
-            <div class="dim-name">Capital</div>
-            <div class="dim-desc">Financial resources</div>
-          </div>
-        </div>
-        <div class="dim-bar"></div>
-      </div>
-      <div class="dim-row">
-        <div class="dim-row-left">
-          <span class="dim-num">03</span>
-          <div>
-            <div class="dim-name">Confidence</div>
-            <div class="dim-desc">Identity & self-worth</div>
-          </div>
-        </div>
-        <div class="dim-bar"></div>
-      </div>
-      <div class="dim-row">
-        <div class="dim-row-left">
-          <span class="dim-num">04</span>
-          <div>
             <div class="dim-name">Capacity</div>
             <div class="dim-desc">Bandwidth & energy</div>
           </div>
@@ -1249,10 +1129,30 @@ footer {
       </div>
       <div class="dim-row">
         <div class="dim-row-left">
-          <span class="dim-num">05</span>
+          <span class="dim-num">03</span>
+          <div>
+            <div class="dim-name">Capital</div>
+            <div class="dim-desc">Financial resources</div>
+          </div>
+        </div>
+        <div class="dim-bar"></div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-row-left">
+          <span class="dim-num">04</span>
           <div>
             <div class="dim-name">Courage</div>
             <div class="dim-desc">Fear & risk</div>
+          </div>
+        </div>
+        <div class="dim-bar"></div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-row-left">
+          <span class="dim-num">05</span>
+          <div>
+            <div class="dim-name">Confidence</div>
+            <div class="dim-desc">Identity & self-worth</div>
           </div>
         </div>
         <div class="dim-bar"></div>
@@ -1332,7 +1232,7 @@ footer {
 <!-- S6 — METHOD -->
 <section class="section method" id="method">
   <div class="method-head reveal">
-    <div class="section-label">The Method</div>
+    <div class="section-label">The 3D Framework</div>
     <h2>Three moves.<br><em>In the right order.</em></h2>
   </div>
   <div class="method-grid">
@@ -1372,45 +1272,13 @@ footer {
   </div>
 </section>
 
-<!-- S7 — EMAIL -->
-<section class="section capture">
-  <div class="capture-ghost" aria-hidden="true">SA</div>
-  <div class="capture-inner">
-    <div class="capture-left reveal">
-      <div class="section-label">Not ready for the test?</div>
-      <h2>Start with<br><em>one<br>question.</em></h2>
-      <p>Before the Scorecard, before the system — there's a single question worth sitting with. Drop your email and we'll send it to you.</p>
-      <p>No pitch. Just the question most Gen X professionals have never been asked directly.</p>
-      <p class="capture-trust">3 emails · 7 days · No upsell · Unsubscribe any time</p>
-    </div>
-    <div class="capture-right reveal">
-      <form class="capture-form" id="emailForm">
-        <input type="text" placeholder="First name" autocomplete="given-name" required>
-        <input type="email" placeholder="Email address" autocomplete="email" required>
-        <button type="submit" class="btn-submit">
-          <span>Send me the question</span>
-          <span class="arrow">→</span>
-        </button>
-      </form>
-      <div class="success-state" id="successState">
-        <h3>It's on its way.</h3>
-        <p>Check your inbox. The first question lands today. The Scorecard will be waiting whenever you're ready.</p>
-      </div>
-      <div class="capture-re">
-        <div class="re-item">
-          <span class="re-label">What you get</span>
-          <p>3 questions over 7 days — each designed to surface what's actually underneath the restlessness.</p>
-        </div>
-        <div class="re-item">
-          <span class="re-label">What you don't get</span>
-          <p>No pitch. No course offer. No countdown. Just the diagnosis, straight.</p>
-        </div>
-        <div class="re-item">
-          <span class="re-label">What comes next</span>
-          <p>When ready, the Scorecard is 3 minutes. The result will feel like the first thing that's described you accurately.</p>
-        </div>
-      </div>
-    </div>
+<!-- S7 — FINAL CTA (replaces retired Email capture) -->
+<section class="section final-cta-section">
+  <div class="final-cta-inner reveal">
+    <div class="section-label">Take the Scorecard</div>
+    <h2>Three minutes.<br><em>One clear result.</em></h2>
+    <p class="final-cta-p">Free. No pitch on the other side. Just the diagnosis, delivered straight.</p>
+    <a href="https://scorecard.genxplore.com/" class="btn-hero" style="display:inline-block;padding:1.1rem 2.5rem;width:auto;margin-top:1.5rem;">Start the Scorecard →</a>
   </div>
 </section>
 
@@ -1418,7 +1286,11 @@ footer {
 <footer>
   <div class="footer-logo">GenX<span>plore</span>™</div>
   <p class="footer-copy">© 2026 JasperEvangelista.com · GenXplore™ · For Gen X designing what comes next.</p>
-  <a href="https://scorecard.genxplore.com/" class="footer-link">Take the Scorecard →</a>
+  <div class="footer-links">
+    <a href="/privacy" class="footer-link">Privacy</a>
+    <a href="/terms" class="footer-link">Terms</a>
+    <a href="https://scorecard.genxplore.com/" class="footer-link">Take the Scorecard →</a>
+  </div>
 </footer>
 
 <script>
@@ -1476,22 +1348,6 @@ const dimObs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.2 });
 document.querySelectorAll('.scorecard-dims').forEach(el => dimObs.observe(el));
-
-/* ─── Email form ─── */
-const form = document.getElementById('emailForm');
-const succ = document.getElementById('successState');
-if (form) {
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const btn = form.querySelector('button');
-    btn.querySelector('span').textContent = 'Sending…';
-    btn.disabled = true;
-    setTimeout(() => {
-      form.style.display = 'none';
-      succ.style.display = 'block';
-    }, 900);
-  });
-}
 </script>
 </body>
 </html>
