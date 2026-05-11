@@ -1480,15 +1480,34 @@ document.querySelectorAll('.scorecard-dims').forEach(el => dimObs.observe(el));
 const form = document.getElementById('emailForm');
 const succ = document.getElementById('successState');
 if (form) {
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     const btn = form.querySelector('button');
     btn.querySelector('span').textContent = 'Sending…';
     btn.disabled = true;
-    setTimeout(() => {
-      form.style.display = 'none';
-      succ.style.display = 'block';
-    }, 900);
+
+    const firstName = form.querySelector('input[type=text]').value;
+    const email = form.querySelector('input[type=email]').value;
+
+    try {
+      await fetch('https://connect.mailerlite.com/api/subscribers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiNWJmOGFiYTlhMDNmOGJmNjcxM2Y4MmNmNjllOTZmYTNiMmEzMzM1OTNkOWEwYzFlYjNhYmZjYjEyMDIxOTM5MzJhY2NhNWQ3MTRhOGE3MDYiLCJpYXQiOjE3Nzg0ODM2NDUuNzkxNDE0LCJuYmYiOjE3Nzg0ODM2NDUuNzkxNDE2LCJleHAiOjQ5MzQxNTcyNDUuNzg1OTQ1LCJzdWIiOiIyMzAxMzc2Iiwic2NvcGVzIjpbXX0.c86e8J9UUZPuwV5zMgYftlsbehKuuHriWAU8kp8akk87LUDz4_W8snzlHhUkR2XZsiLWT1a3nnlcaUSnV-dKlQHxGmHwTThAnIcDtm3O9QJtlGaMFOekNjX592ig0fa-bAZNpCVz0UabMxqCEVnrHg-9ofEayQJ2-n8N_nHMRTOLsOHr1xKHsv5k2RC91iU4yIBn6cTKKs42057T5eamRjtVz3veKEtS4OFBxUKNUAo_aSjBP3u9p8EQKMgkmXOtxYaT5V5JW42-c9012tfpN_xEu57FJlmezKh4Fx9InNbzzvA1DFFEyA4g4yCG8xhyIDsVEHBU0mPAqqrK8arfnfFdos2ztgTuBaFZhpOkE9fyLMlQbWOh4ogJ2AhKcBhm8LtomfciYo4PTeyB6I6VdmYxjDrdBgXYehxcEzDz49veksMj1LEosFZYNPp6u0G-OTN9Uq41g9SYExZHZGcDT59b_PDUQLFGuPwVZo98Bw5iYESYriaXAr6F4MiEvuTBgjsS8yNWuBCAmQ12fxtIWhm6OQdeVIm2-77CQAzJnhmEbtBLCnNzktNteFQpmvW7ZLgkorqn2Qur4mQ7QYNH7gRLg9MqeXnO3pa8ZlsD1Y1qxg_QhgLDDC8yKRpemrgSZmEt0lyn1Mj0GMrprrg6-2vqvxpDNRAQwPRTX-CqqXc'
+        },
+        body: JSON.stringify({
+          email: email,
+          fields: { name: firstName },
+          groups: ['185622135245375031']
+        })
+      });
+    } catch (err) {
+      console.error('MailerLite error:', err);
+    }
+
+    form.style.display = 'none';
+    succ.style.display = 'block';
   });
 }
 </script>
