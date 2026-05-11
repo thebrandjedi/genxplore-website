@@ -1392,7 +1392,7 @@ footer {
         </button>
       </form>
       <div class="success-state" id="successState">
-        <h3>It's on its way.</h3>
+        <h3 id="successName">It's on its way.</h3>
         <p>Check your inbox. Your question lands tomorrow. The Scorecard will be waiting whenever you're ready.</p>
       </div>
       <div class="capture-re">
@@ -1506,8 +1506,9 @@ if (form) {
       console.error('MailerLite error:', err);
     }
 
-    form.style.display = 'none';
-    succ.style.display = 'block';
+form.style.display = 'none';
+succ.style.display = 'block';
+document.getElementById('successName').textContent = firstName + ', it\'s on its way.';
   });
 }
 </script>
